@@ -100,7 +100,7 @@ export async function POST(
       prompt: experience.prompt,
       n: 1,
       size: "auto",
-      quality: "auto",
+      quality: "low",
     });
 
     console.log("Response:", response);
