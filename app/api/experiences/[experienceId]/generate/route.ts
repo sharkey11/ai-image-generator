@@ -148,8 +148,8 @@ export async function POST(
       },
     });
 
+    const imageUrl = uploadResponse.attachment.source.url;
     // Convert base64 to data URL for the response
-    const imageUrl = `data:image/png;base64,${base64Image}`;
 
     return NextResponse.json({
       success: true,
