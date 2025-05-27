@@ -99,8 +99,8 @@ export async function POST(
       image: originalFile,
       prompt: experience.prompt,
       n: 1,
-      size: "512x512",
-      quality: "low",
+      size: "auto",
+      quality: "auto",
     });
 
     console.log("Response:", response);
