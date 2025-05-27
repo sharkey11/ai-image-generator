@@ -11,10 +11,10 @@ const openai = new OpenAI({
 
 export async function POST(
   request: Request,
-  { params }: { params: { experienceId: string } }
+  { params }: { params: Promise<{ experienceId: string }> }
 ) {
   try {
-    const experienceId = params.experienceId;
+    const { experienceId } = await params;
 
     if (!experienceId) {
       return NextResponse.json(

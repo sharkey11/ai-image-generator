@@ -37,16 +37,17 @@ async function findOrCreateExperience(experienceId: string) {
 export default async function ExperiencePage({
   params,
 }: {
-  params: { experienceId: string };
+  params: Promise<{ experienceId: string }>;
 }) {
   const headersList = await headers();
   const { userId } = await verifyUserToken(headersList);
 
-  const experience = await findOrCreateExperience(params.experienceId);
+  const { experienceId } = await params;
+  const experience = await findOrCreateExperience(experienceId);
 
   const hasAccess = await whopApi.checkIfUserHasAccessToExperience({
     userId,
-    experienceId: params.experienceId,
+    experienceId,
   });
 
   return (
@@ -54,7 +55,7 @@ export default async function ExperiencePage({
       <ExperiencePrompt
         prompt={experience.prompt}
         accessLevel={hasAccess.hasAccessToExperience.accessLevel}
-        experienceId={params.experienceId}
+          experienceId={experienceId}
       />
     </div>
   );
